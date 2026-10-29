@@ -77,6 +77,9 @@ func document(blocks []Block, width, height int) string {
 	var b strings.Builder
 	b.WriteString(xmlHeader)
 	b.WriteString(`<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>`)
+	if len(blocks) == 0 {
+		b.WriteString("<w:p/>") // Word expects at least one paragraph in the body
+	}
 	for _, blk := range blocks {
 		b.WriteString("<w:p><w:pPr>")
 		switch blk.Kind {
@@ -143,8 +146,34 @@ func coreProps(o Options) string {
 		`<dc:title>` + escape(o.Title) + `</dc:title><dc:language>` + escape(o.Lang) + `</dc:language></cp:coreProperties>`
 }
 
+// escape writes s as XML text. Characters that XML 1.0 forbids (control characters such as
+// form feeds pasted from PDFs) become spaces, and invalid UTF-8 becomes U+FFFD.
 func escape(s string) string {
-	return strings.NewReplacer("&", "&amp;", "<", "&lt;", ">", "&gt;", `"`, "&quot;").Replace(s)
+	var b strings.Builder
+	b.Grow(len(s))
+	for _, r := range s {
+		switch {
+		case r == '&':
+			b.WriteString("&amp;")
+		case r == '<':
+			b.WriteString("&lt;")
+		case r == '>':
+			b.WriteString("&gt;")
+		case r == '"':
+			b.WriteString("&quot;")
+		case validXML(r):
+			b.WriteRune(r)
+		default:
+			b.WriteByte(' ')
+		}
+	}
+	return b.String()
+}
+
+// validXML reports whether r is allowed in an XML 1.0 document.
+func validXML(r rune) bool {
+	return r == '\t' || r == '\n' || r == '\r' ||
+		r >= 0x20 && r <= 0xD7FF || r >= 0xE000 && r <= 0xFFFD || r >= 0x10000 && r <= 0x10FFFF
 }
 
 const xmlHeader = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>` + "\n"

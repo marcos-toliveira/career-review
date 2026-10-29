@@ -9,10 +9,14 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"path/filepath"
+	"regexp"
 	"strings"
 
 	"github.com/marcos-toliveira/career-review/internal/cvdocx"
 )
+
+var langTag = regexp.MustCompile(`^[a-z]{2,3}(-[A-Z]{2})?$`)
 
 func main() {
 	if err := run(os.Args[1:]); err != nil {
@@ -39,6 +43,9 @@ func run(args []string) error {
 		return fmt.Errorf("informe um arquivo .md")
 	}
 	in := fs.Arg(0)
+	if !langTag.MatchString(*lang) {
+		return fmt.Errorf("idioma %q inválido: use um código como pt-BR ou en-US", *lang)
+	}
 	src, err := os.ReadFile(in)
 	if err != nil {
 		return err
@@ -60,6 +67,9 @@ func run(args []string) error {
 	dst := *out
 	if dst == "" {
 		dst = strings.TrimSuffix(in, ".md") + ".docx"
+	}
+	if filepath.Clean(dst) == filepath.Clean(in) {
+		return fmt.Errorf("a saída %q é o próprio arquivo de entrada", dst)
 	}
 	var buf bytes.Buffer
 	if err := cvdocx.Write(&buf, blocks, o); err != nil {

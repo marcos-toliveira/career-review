@@ -230,7 +230,7 @@ Registro só de acréscimo. Uma decisão nova que contradiz uma antiga diz qual 
 
 ### D. Currículo em Markdown
 
-O gerador `cvdocx` entende este formato. Cada linha dentro de um parágrafo vira uma linha no documento.
+O gerador `cvdocx` entende este formato. Cada linha dentro de um parágrafo vira uma linha no documento. Use só `#`, `##` e `###`, listas com `-`, **negrito** e *itálico*. Prefira escrever endereços por extenso (`linkedin.com/in/usuario`); um link `[texto](url)` sai como "texto (url)". Tabelas não são suportadas.
 
 ```markdown
 # Nome Sobrenome
