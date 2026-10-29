@@ -131,7 +131,10 @@ Depois da base de fatos, me faça poucas perguntas de direção:
 - projetos, se fizerem sentido;
 - competências, formação e idiomas;
 - contato profissional (e-mail, LinkedIn, portfólio). Nada de foto, documento, idade, estado civil ou endereço completo, a menos que o país da vaga exija.
-- Se você tiver como, gere também um `.docx` ou PDF a partir do texto aprovado.
+- Escreva o currículo em Markdown no formato do apêndice D. Para gerar o `.docx`:
+  - se você tiver terminal com Go 1.22 ou mais novo, rode `go run github.com/marcos-toliveira/career-review/cmd/cvdocx@latest -lang pt-BR curriculo-ptbr.md` (e `-lang en-US` para a versão em inglês). O padrão é papel A4 em português e Letter em inglês; `-paper a4` ou `-paper letter` troca;
+  - se tiver o pandoc, `pandoc curriculo-ptbr.md -o curriculo-ptbr.docx` também serve;
+  - se não tiver nenhum dos dois, entregue o Markdown e me diga que ele pode ser colado no Google Docs ou no Word.
 
 **Versão em inglês:** escreva pelo sentido, não traduza palavra por palavra. Adapte termos locais com uma explicação curta (ex.: o nome de um documento ou órgão brasileiro precisa de 3 ou 4 palavras de contexto para um leitor estrangeiro). Use títulos de cargo que existam no mercado internacional.
 
@@ -223,4 +226,38 @@ Registro só de acréscimo. Uma decisão nova que contradiz uma antiga diz qual 
 - Informação confidencial ou estratégica de empregadores
 - Assuntos que o dono marcou como sensíveis:
   - 
+```
+
+### D. Currículo em Markdown
+
+O gerador `cvdocx` entende este formato. Cada linha dentro de um parágrafo vira uma linha no documento.
+
+```markdown
+# Nome Sobrenome
+
+Título profissional · especialidade · principais ferramentas
+
+Cidade, UF · e-mail · linkedin.com/in/usuario
+
+## Resumo
+
+Três ou quatro linhas.
+
+## Experiência
+
+### Empresa · mm/aaaa até hoje
+
+**Cargo · mm/aaaa até hoje**
+Uma linha de contexto.
+
+- Realização com escala e resultado.
+- Outra realização.
+
+## Competências
+
+- **Grupo:** itens
+
+## Formação e idiomas
+
+Curso, instituição, ano. Idiomas.
 ```
