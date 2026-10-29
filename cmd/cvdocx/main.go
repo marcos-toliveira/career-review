@@ -68,7 +68,7 @@ func run(args []string) error {
 	if dst == "" {
 		dst = strings.TrimSuffix(in, ".md") + ".docx"
 	}
-	if filepath.Clean(dst) == filepath.Clean(in) {
+	if sameFile(in, dst) {
 		return fmt.Errorf("a saída %q é o próprio arquivo de entrada", dst)
 	}
 	var buf bytes.Buffer
@@ -80,4 +80,17 @@ func run(args []string) error {
 	}
 	fmt.Println(dst)
 	return nil
+}
+
+// sameFile reports whether out names the input file, directly or through a symlink or hard link.
+func sameFile(in, out string) bool {
+	if filepath.Clean(in) == filepath.Clean(out) {
+		return true
+	}
+	si, err := os.Stat(in)
+	if err != nil {
+		return false
+	}
+	so, err := os.Stat(out)
+	return err == nil && os.SameFile(si, so)
 }

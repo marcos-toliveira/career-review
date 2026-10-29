@@ -56,3 +56,23 @@ func TestExamples(t *testing.T) {
 		}
 	}
 }
+
+func TestRunRefusesAliasOfInput(t *testing.T) {
+	dir := t.TempDir()
+	in := filepath.Join(dir, "cv.md")
+	os.WriteFile(in, []byte("# Ana\n"), 0o644)
+	sym := filepath.Join(dir, "alias.md")
+	if err := os.Symlink(in, sym); err != nil {
+		t.Skip("symlink indisponível:", err)
+	}
+	hard := filepath.Join(dir, "hard.md")
+	os.Link(in, hard)
+	for _, out := range []string{sym, hard} {
+		if err := run([]string{"-o", out, in}); err == nil {
+			t.Errorf("-o %s deveria ser recusado", filepath.Base(out))
+		}
+	}
+	if b, _ := os.ReadFile(in); string(b) != "# Ana\n" {
+		t.Fatal("o arquivo de entrada foi alterado")
+	}
+}

@@ -46,6 +46,7 @@ func TestInline(t *testing.T) {
 		{"[Certificação] Ver [Credencial](https://x.io)", Line{{Text: "[Certificação] Ver Credencial (x.io)"}}},
 		{"colchete [solto", Line{{Text: "colchete [solto"}}},
 		{"[a [b](https://u.io)", Line{{Text: "[a b (u.io)"}}},
+		{"[artigo](https://x.io/a_(b)) fim", Line{{Text: "artigo (x.io/a_(b)) fim"}}},
 		{"crase `solta", Line{{Text: "crase `solta"}}},
 	}
 	for _, c := range cases {

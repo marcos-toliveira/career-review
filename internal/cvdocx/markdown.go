@@ -202,7 +202,7 @@ func link(s string) (string, int) {
 	if closeText < 0 || strings.IndexByte(s[1:closeText], '[') >= 0 || !strings.HasPrefix(s[closeText:], "](") {
 		return "", 0
 	}
-	closeURL := strings.IndexByte(s[closeText+2:], ')')
+	closeURL := matchingParen(s[closeText+2:])
 	if closeURL < 0 {
 		return "", 0
 	}
@@ -213,4 +213,22 @@ func link(s string) (string, int) {
 		return text, n
 	}
 	return text + " (" + bare + ")", n
+}
+
+// matchingParen returns the index of the ")" that closes a link destination, allowing
+// balanced parentheses inside it, or -1.
+func matchingParen(s string) int {
+	depth := 0
+	for i := 0; i < len(s); i++ {
+		switch s[i] {
+		case '(':
+			depth++
+		case ')':
+			if depth == 0 {
+				return i
+			}
+			depth--
+		}
+	}
+	return -1
 }
