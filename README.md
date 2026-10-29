@@ -40,7 +40,7 @@ Troque `~/.claude/skills` pela pasta de skills do seu agente.
 ### Antes de começar
 
 - Separe o que tiver: currículos antigos, carteira de trabalho digital ou contratos, cartas de promoção, certificados e o PDF do seu perfil do LinkedIn.
-- **Privacidade:** antes de anexar, oculte números de documentos, dados bancários, salários e dados de outras pessoas. Envie só o necessário. O que você envia fica sujeito às regras do serviço de IA que você usa. Este repositório não coleta nada.
+- **Privacidade:** antes de anexar, oculte números de documentos, dados bancários, salários e dados de outras pessoas. Não anexe material confidencial de empregador: passe só um resumo. Envie só o necessário. O que você envia fica sujeito às regras do serviço de IA que você usa. Este repositório não coleta nada.
 - Reserve algumas conversas. A primeira fase é a mais longa e a mais importante.
 - A sua leitura é a revisão final. Corrija o que não soar como você.
 
@@ -82,7 +82,7 @@ Replace `~/.claude/skills` with your agent's skills folder.
 ### Before you begin
 
 - Gather what you have: old résumés, employment records or contracts, promotion letters, certificates, and a PDF of your LinkedIn profile.
-- **Privacy:** before attaching files, redact ID numbers, bank details, salaries and other people's data. Share only what is needed. Whatever you send is subject to the terms of the AI service you use. This repository collects nothing.
+- **Privacy:** before attaching files, redact ID numbers, bank details, salaries and other people's data. Don't attach confidential employer material: share a summary instead. Share only what is needed. Whatever you send is subject to the terms of the AI service you use. This repository collects nothing.
 - Plan for a few sessions. The first phase is the longest and the most important.
 - Your own reading is the final review. Fix anything that doesn't sound like you.
 

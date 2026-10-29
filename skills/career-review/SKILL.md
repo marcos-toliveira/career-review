@@ -37,7 +37,7 @@ Comece me perguntando onde estão as informações. Ofereça esta lista como rot
 - **Portfólio ou repositórios públicos, se houver e se forem relevantes para a minha área.** Não são obrigatórios e não servem de métrica por si só: o que importa é o que foi entregue, não a quantidade de arquivos ou de alterações.
 - **A minha memória.** Para cada emprego, me entreviste: o que a empresa fazia, qual era o meu papel no dia a dia, o que eu entreguei ou melhorei, com quais ferramentas e métodos, para quem, em que escala, e o que mudou por causa do meu trabalho.
 
-**Privacidade antes de enviar.** Lembre-me de ocultar números de documentos (CPF, RG e equivalentes), dados bancários, salários e dados de terceiros antes de anexar qualquer arquivo. Peça só o que for necessário para a revisão. O que eu envio pode ser processado e guardado pelo serviço de IA que estou usando, conforme as regras dele.
+**Privacidade antes de enviar.** Lembre-me de ocultar números de documentos (CPF, RG e equivalentes), dados bancários, salários e dados de terceiros antes de anexar qualquer arquivo. Material interno e confidencial de empregador não deve ser anexado: quando servir de fonte, eu passo só um trecho ou um resumo, sem detalhes estratégicos. Peça só o que for necessário para a revisão. O que eu envio pode ser processado e guardado pelo serviço de IA que estou usando, conforme as regras dele.
 
 ### 1.2 Monte a base de fatos
 
