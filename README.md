@@ -46,7 +46,7 @@ go run github.com/marcos-toliveira/career-review/cmd/cvdocx@latest -lang pt-BR c
 go run github.com/marcos-toliveira/career-review/cmd/cvdocx@latest -lang en-US curriculo-en.md
 ```
 
-Precisa do Go 1.22 ou mais novo. O idioma define o corretor ortográfico do Word e o papel padrão (A4 em português, Letter em inglês; troque com `-paper`). Exemplos fictícios em [`examples/`](examples/).
+Precisa do Go 1.22 ou mais novo. O idioma define o corretor ortográfico do Word e o papel padrão (A4 em português, Letter em inglês; troque com `-paper`). Links em Markdown saem como texto seguido do endereço, por exemplo "GitHub (github.com/usuario)". O gerador não sobrescreve o próprio `.md`. Exemplos fictícios em [`examples/`](examples/).
 
 ### Antes de começar
 
@@ -96,10 +96,10 @@ The repository ships `cvdocx`, a dependency-free Go tool that turns the Markdown
 
 ```sh
 go run github.com/marcos-toliveira/career-review/cmd/cvdocx@latest -lang pt-BR curriculo-ptbr.md
-go run github.com/marcos-toliveira/career-review/cmd/cvdocx@latest -lang en-US resume-en.md
+go run github.com/marcos-toliveira/career-review/cmd/cvdocx@latest -lang en-US curriculo-en.md
 ```
 
-Requires Go 1.22 or newer. The language sets Word's spell checker and the default paper size (A4 for Portuguese, Letter for English; override with `-paper`). Fictional examples in [`examples/`](examples/).
+Requires Go 1.22 or newer. The language sets Word's spell checker and the default paper size (A4 for Portuguese, Letter for English; override with `-paper`). Markdown links come out as text followed by the address, e.g. "GitHub (github.com/user)". The tool never overwrites the source `.md`. Fictional examples in [`examples/`](examples/).
 
 ### Before you begin
 

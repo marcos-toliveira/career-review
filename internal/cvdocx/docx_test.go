@@ -39,6 +39,11 @@ func TestWritePackageIsWellFormed(t *testing.T) {
 		if !ok {
 			t.Fatalf("parte ausente: %s", name)
 		}
+		for _, r := range body {
+			if !validXML(r) {
+				t.Fatalf("%s tem caractere proibido em XML 1.0: %U", name, r)
+			}
+		}
 		d := xml.NewDecoder(strings.NewReader(body))
 		for {
 			if _, err := d.Token(); err == io.EOF {
@@ -53,6 +58,36 @@ func TestWritePackageIsWellFormed(t *testing.T) {
 		if !strings.Contains(doc, want) {
 			t.Errorf("document.xml sem %q", want)
 		}
+	}
+}
+
+func TestControlCharactersAndRelationships(t *testing.T) {
+	parts := render(t, "# Ana\x0cSouza\x01\n\nok\xff\n", Defaults("pt-BR"))
+	doc := parts["word/document.xml"]
+	for _, r := range doc {
+		if !validXML(r) {
+			t.Fatalf("caractere proibido no document.xml: %U", r)
+		}
+	}
+	if !strings.Contains(doc, "Ana Souza ") || !strings.Contains(doc, "ok\uFFFD") {
+		t.Fatalf("texto com caracteres de controle mal convertido: %s", doc)
+	}
+	rels := parts["word/_rels/document.xml.rels"] + parts["_rels/.rels"]
+	for _, target := range []string{"styles.xml", "numbering.xml", "word/document.xml", "docProps/core.xml"} {
+		if !strings.Contains(rels, `Target="`+target+`"`) {
+			t.Errorf("relationship para %s ausente", target)
+		}
+	}
+	for _, part := range []string{"word/styles.xml", "word/numbering.xml", "word/document.xml", "docProps/core.xml"} {
+		if _, ok := parts[part]; !ok {
+			t.Errorf("relationship aponta para parte inexistente: %s", part)
+		}
+	}
+}
+
+func TestEmptyDocumentHasParagraph(t *testing.T) {
+	if doc := render(t, "", Defaults("pt-BR"))["word/document.xml"]; !strings.Contains(doc, "<w:p/>") {
+		t.Fatal("documento vazio sem parágrafo")
 	}
 }
 
