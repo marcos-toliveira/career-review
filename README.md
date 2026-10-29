@@ -37,6 +37,17 @@ mkdir -p ~/.claude/skills && cp -r career-review/skills/career-review ~/.claude/
 
 Troque `~/.claude/skills` pela pasta de skills do seu agente.
 
+### Gerar o currículo em .docx
+
+O repositório traz o `cvdocx`, um gerador em Go, sem dependências, que converte o currículo em Markdown (formato do apêndice D da skill) num `.docx` limpo, em português ou inglês:
+
+```sh
+go run github.com/marcos-toliveira/career-review/cmd/cvdocx@latest -lang pt-BR curriculo-ptbr.md
+go run github.com/marcos-toliveira/career-review/cmd/cvdocx@latest -lang en-US curriculo-en.md
+```
+
+Precisa do Go 1.22 ou mais novo. O idioma define o corretor ortográfico do Word e o papel padrão (A4 em português, Letter em inglês; troque com `-paper`). Exemplos fictícios em [`examples/`](examples/).
+
 ### Antes de começar
 
 - Separe o que tiver: currículos antigos, carteira de trabalho digital ou contratos, cartas de promoção, certificados e o PDF do seu perfil do LinkedIn.
@@ -78,6 +89,17 @@ mkdir -p ~/.claude/skills && cp -r career-review/skills/career-review ~/.claude/
 ```
 
 Replace `~/.claude/skills` with your agent's skills folder.
+
+### Generate the résumé as .docx
+
+The repository ships `cvdocx`, a dependency-free Go tool that turns the Markdown résumé (the format in appendix D of the skill) into a clean `.docx`, in Portuguese or English:
+
+```sh
+go run github.com/marcos-toliveira/career-review/cmd/cvdocx@latest -lang pt-BR curriculo-ptbr.md
+go run github.com/marcos-toliveira/career-review/cmd/cvdocx@latest -lang en-US resume-en.md
+```
+
+Requires Go 1.22 or newer. The language sets Word's spell checker and the default paper size (A4 for Portuguese, Letter for English; override with `-paper`). Fictional examples in [`examples/`](examples/).
 
 ### Before you begin
 
